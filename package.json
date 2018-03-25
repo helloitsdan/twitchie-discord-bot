@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "Twitchie will let your Discord server know when a stream has gone live!",
   "main": "server/index.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
     "start": "node -r dotenv/config server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:js": "eslint \"{server,db}/**/*.js\"",
+    "lint": "npm lint:js",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -24,5 +30,15 @@
     "lowdb": "^1.0.0",
     "node-fetch": "^2.1.1",
     "winston": "^3.0.0-rc3"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.5.0"
+  },
+  "lint-staged": {
+    "{server,db}/**/*.js": "eslint"
   }
 }

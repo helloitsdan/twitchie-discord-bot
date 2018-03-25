@@ -1,14 +1,12 @@
 const { createLogger, format, transports } = require('winston')
 
-const logMessage = format.printf(
-  ({
-    timestamp,
-    level,
-    message,
-    ...rest
-  }) => (
-    `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`
-  )
+const logMessage = ({
+  timestamp,
+  level,
+  message,
+  ...rest
+}) => (
+  `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`
 )
 
 const logger = createLogger({
@@ -17,7 +15,7 @@ const logger = createLogger({
       format: 'HH:mm MM-DD-YYYY',
     }),
     format.prettyPrint(),
-    logMessage,
+    format.printf(logMessage),
   ),
   transports: [
     new transports.Console(),
@@ -29,7 +27,7 @@ const logger = createLogger({
       filename: 'errors.log',
       level: 'error',
     }),
-  ]
+  ],
 })
 
 module.exports = logger

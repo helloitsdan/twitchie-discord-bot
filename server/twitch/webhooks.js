@@ -9,12 +9,11 @@ const webhookOptions = {
   'hub.callback': 'http://twitchie.stream.witch.zone/notify',
   'hub.lease_seconds': '864000',
   'hub.secret': 'twitchie',
-}
+};
 
-;(async () => {
-  const response = await fetch(
-    `${twitchWebhooksURL}?${querystring.stringify(webhookOptions)}`
-  )
+(async () => {
+  const webhookURL = `${twitchWebhooksURL}?${querystring.stringify(webhookOptions)}`
+  const response = await fetch(webhookURL)
 
   console.log(await response.json())
 })()

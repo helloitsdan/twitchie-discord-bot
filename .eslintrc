@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true,
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "rules": {
+    "semi": ["error", "never"],
+    "capitalized-comments": "off",
+    "global-require": "off",
+  },
+}

@@ -1,5 +1,6 @@
 const client = require('../client')
 const emitter = require('../emitter')
+const logger = require('../logger')
 
 const { getNotificationsForUser } = require('../../db/notifications')
 
@@ -18,7 +19,7 @@ emitter.on('live', async (stream) => {
       throw new TypeError(`Twitchie is not currently connected to Channel ID ${channelId}!`)
     }
 
-    const response = await channel.send(
+    await channel.send(
       message,
       {
         embed: {
@@ -27,16 +28,16 @@ emitter.on('live', async (stream) => {
           title: stream.title,
           timestamp: stream.started_at,
           author: {
-            name: "Twitch",
+            name: 'Twitch',
           },
           image: {
             url: stream.thumbnail_url,
           },
           thumbnail: {
             url: stream.thumbnail_url,
-          }
+          },
         },
-      }
+      },
     )
 
     logger.info(`Notified #${channel.name}!`)
